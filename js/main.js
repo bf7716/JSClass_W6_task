@@ -20,6 +20,9 @@ axios.get(dataUrl)
     addDate();
     filterArea();
   })
+  .catch(function (error) {
+    console.log(error);
+  })
 
 // 選擇地區篩選資料
 function filterArea(){
@@ -50,6 +53,12 @@ function addDate(){
       addPrice.value.trim() === "" ||
       addRate.value.trim() === ""){
         alert(`欄位不得為空，請填入資訊`);
+    }else if(addGroup.value < 0){
+      alert("套票組數不能小於 0")
+    }else if(addPrice.value < 0){
+      alert("套票金額不能小於 0")
+    }else if(addRate.value < 0 || addRate.value > 10){
+      alert("套票星級須在 1~10 之間")
     }else{
       obj.id = data.length;
       obj.name = addName.value;
@@ -68,7 +77,7 @@ function addDate(){
   })
 }
 
-// 選染資料
+// 渲染資料
 function renderData(data){
   let content = "";
 
